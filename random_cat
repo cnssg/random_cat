@@ -1,0 +1,13 @@
+import requests
+from PIL import Image
+
+url = " https://api.thecatapi.com/v1/images/search"
+
+r = requests.get(url).content.decode('UTF-8').split(('"url":'))
+url = r[1].split(",")[0][1:-1]
+
+print(url, "https://cdn2.thecatapi.com/images/5di.jpeg")
+
+im = Image.open(requests.get(url, stream=True).raw)
+
+im.show()
